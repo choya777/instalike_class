@@ -17,5 +17,4 @@ Stages
 	
 	
 Dependencies
-1. https://github.com/guilhermefarias/instagram-api ???? need to check of the api provides all of the necesery functions
-2. https://github.com/huttarichard/instagram-private-api - no ned of access token, but need to run on VM with ARM process due to libstrings.so. see .signPayload() section.
+1. https://github.com/instabot-py/instabot.py
