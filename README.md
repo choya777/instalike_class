@@ -14,8 +14,14 @@ Stages
 	5. trafic exectiuon by limit multithreded.
 	6. storge - mongodb?
 	7. work on component #3 most of the logic. should considure desine and workflow on that part.
-	
+
+
+API Requrents 
+	1. login
+	2. get imiges by tag
+	3. get followers of a user 
+	4. follow, like, comment
 	
 Dependencies
 1. https://github.com/instabot-py/instabot.py
-https://github.com/LevPasha/Instagram-API-python
+2. https://github.com/LevPasha/Instagram-API-python ?
