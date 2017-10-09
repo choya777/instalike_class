@@ -18,3 +18,4 @@ Stages
 	
 Dependencies
 1. https://github.com/instabot-py/instabot.py
+https://github.com/LevPasha/Instagram-API-python
