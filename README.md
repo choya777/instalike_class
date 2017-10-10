@@ -14,6 +14,7 @@ Stages
 	5. trafic exectiuon by limit multithreded.
 	6. storge - mongodb?
 	7. work on component #3 most of the logic. should considure desine and workflow on that part.
+	8. who is not following me + unffollow them
 
 
 API Requrents 
