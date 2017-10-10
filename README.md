@@ -26,3 +26,5 @@ API Requrents
 Dependencies
 1. https://github.com/instabot-py/instabot.py
 2. https://github.com/LevPasha/Instagram-API-python ?
+
+Checkusersinfo.py somefishy 
