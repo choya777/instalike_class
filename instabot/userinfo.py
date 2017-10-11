@@ -14,28 +14,30 @@ class UserInfo:
                   "(KHTML, like Gecko) Chrome/48.0.2564.103 Safari/537.36")
 
     url_user_info = "https://www.instagram.com/%s/?__a=1"
-    url_list = {
-        "ink361": {
-            "main": "http://ink361.com/",
-            "user": "http://ink361.com/app/users/%s",
-            "search_name": "https://data.ink361.com/v1/users/search?q=%s",
-            "search_id": "https://data.ink361.com/v1/users/ig-%s",
-            "followers": "https://data.ink361.com/v1/users/ig-%s/followed-by",
-            "following": "https://data.ink361.com/v1/users/ig-%s/follows",
-            "stat": "http://ink361.com/app/users/ig-%s/%s/stats"
-        }
-    }
+    #url_list = {
+       # "ink361": {
+        #    "main": "http://ink361.com/",
+        #    "user": "http://ink361.com/app/users/%s",
+       #     "search_name": "https://data.ink361.com/v1/users/search?q=%s",
+        #    "search_id": "https://data.ink361.com/v1/users/ig-%s",
+       #     "followers": "https://data.ink361.com/v1/users/ig-%s/followed-by",
+      #      "following": "https://data.ink361.com/v1/users/ig-%s/follows",
+     #       "stat": "http://ink361.com/app/users/ig-%s/%s/stats"
+    #    }
+   # }
 
     def __init__(self, info_aggregator="ink361"):
         self.i_a = info_aggregator
-        self.hello()
+        self.s = requests.Session()
+        self.s.headers.update({'User-Agent': self.user_agent})
+        #self.hello()
 
     def hello(self):
         self.s = requests.Session()
         self.s.headers.update({'User-Agent': self.user_agent})
-        main = self.s.get(self.url_list[self.i_a]["main"])
-        if main.status_code == 200:
-            return True
+        #main = self.s.get(self.url_list[self.i_a]["main"])
+        #if main.status_code == 200:
+            #return True
         return False
 
     def get_user_id_by_login(self, user_name):
@@ -55,20 +57,21 @@ class UserInfo:
         if not self.user_id and not self.user_name:
             # you have nothing
             return False
-        elif self.user_id:
+
+       # elif self.user_id:
             # you have just id
-            search_url = self.url_list[self.i_a]["search_id"] % self.user_id
-        elif self.user_name:
+            #search_url = self.url_list[self.i_a]["search_id"] % self.user_id
+       # elif self.user_name:
             # you have just name
-            search_url = self.url_list[self.i_a][
-                "search_name"] % self.user_name
+           # search_url = self.url_list[self.i_a][
+            #    "search_name"] % self.user_name
         else:
             # you have id and name
             return True
 
-        search = self.s.get(search_url)
+        #search = self.s.get(search_url)
 
-        if search.status_code == 200:
+        #if search.status_code == 200:
             r = json.loads(search.text)
             if self.user_id:
                 # you have just id
