@@ -404,8 +404,8 @@ class InstaBot:
                                          (self.media_by_tag[i]['id'])
                             self.write_log(log_string)
                             like = self.like(self.media_by_tag[i]['id'])
-                            # comment = self.comment(self.media_by_tag[i]['id'], 'Cool!')
-                            # follow = self.follow(self.media_by_tag[i]["owner"]["id"])
+                            #self.comment(self.media_by_tag[i]['id'], 'Cool!')
+                            #elf.follow(self.media_by_tag[i]["owner"]["id"])
                             if like != 0:
                                 if like.status_code == 200:
                                     # Like, all ok!
@@ -565,18 +565,20 @@ class InstaBot:
         while True:
             # ------------------- Get media_id -------------------
             if len(self.media_by_tag) == 0:
+                #chooses randomly - TODO: change according to weight.
                 self.get_media_id_by_tag(random.choice(self.tag_list))
                 self.this_tag_like_count = 0
+                #have random max_like - TODO: change according to user weight
                 self.max_tag_like_count = random.randint(
                     1, self.max_like_for_one_tag)
             # ------------------- Like -------------------
             self.new_auto_mod_like()
             # ------------------- Follow -------------------
-            self.new_auto_mod_follow()
+            #self.new_auto_mod_follow()
             # ------------------- Unfollow -------------------
-            self.new_auto_mod_unfollow()
+            #self.new_auto_mod_unfollow()
             # ------------------- Comment -------------------
-            self.new_auto_mod_comments()
+            #self.new_auto_mod_comments()
             # Bot iteration in 1 sec
             time.sleep(3)
             # print("Tic!")

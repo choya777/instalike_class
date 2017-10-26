@@ -1,5 +1,5 @@
 class FindMostPopularAccountByTags(object):
-    def __init__(self, ai, tags_list, limit):
+    def __init__(self, ai: object, tags_list: object, limit: object) -> object:
         self.ai = ai
         self.tag_name = tags_list
         self.limit = limit

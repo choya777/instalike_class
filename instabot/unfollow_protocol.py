@@ -19,7 +19,7 @@ def unfollow_protocol(self):
             follow_protocol(self)
         if len(self.media_on_feed) != 0 and self.is_follower_number < 5:
             chooser = random.randint(0, len(self.media_on_feed) - 1)
-            self.current_user = self.media_on_feed[chooser]["node"]["owner"][
+            self.current_user = self.media_on_feed[chooser]["node"]["username"][
                 "username"]
             self.current_id = self.media_on_feed[chooser]["node"]["owner"][
                 "id"]

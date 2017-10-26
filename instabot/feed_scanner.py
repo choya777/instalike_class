@@ -17,14 +17,12 @@ def feed_scanner(self):
         #First the bot try to collect media id on your recent feed
         get_media_id_recent_feed(self)
         #If your account is old enough, there will be 24 photos on your recent feed
-        if len(self.media_on_feed) > 23:
+        if len(self.media_on_feed) < 23:
             #Select the media on your recent feed randomly
             chooser = random.randint(0, len(self.media_on_feed) - 1)
             #The bot will save the owner of the media name and use it to try checking his/her profile
-            self.current_user = self.media_on_feed[chooser]["node"]["owner"][
-                "id"]
-            self.current_id = self.media_on_feed[chooser]["node"]["owner"][
-                "id"]
+            self.current_user = self.media_on_feed[chooser]["node"]["owner"]["username"]
+            self.current_id = self.media_on_feed[chooser]["node"]["owner"]["id"]
 
         #If your account is new, and you don't following anyone, your recent feed will be empty
         else:
@@ -34,8 +32,7 @@ def feed_scanner(self):
             max_media = 0
             while len(self.media_on_feed) > 5 and max_media < 5:
                 chooser = random.randint(0, len(self.media_on_feed) - 1)
-                self.current_id = self.media_on_feed[chooser]["node"]["owner"][
-                    "id"]
+                self.current_id = self.media_on_feed[chooser]["node"]["owner"]["id"]
                 self.follow(self.current_id)
                 self.media_on_feed[chooser] = None
                 max_media += 1

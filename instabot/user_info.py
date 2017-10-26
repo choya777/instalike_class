@@ -37,11 +37,14 @@ def get_user_info(self, username):
                     'requested_by_viewer']
                 has_requested_viewer = user_info['user'][
                     'has_requested_viewer']
+                full_name = user_info['user']['full_name']
                 log_string = "Follower : %i" % (follower)
                 self.write_log(log_string)
                 log_string = "Following : %s" % (follows)
                 self.write_log(log_string)
                 log_string = "Media : %i" % (media)
+                self.write_log(log_string)
+                log_string = "Full Name : %i" % (full_name)
                 self.write_log(log_string)
 
                 if follower / follows > 2:
