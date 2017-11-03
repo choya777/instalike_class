@@ -27,4 +27,9 @@ Dependencies
 1. https://github.com/instabot-py/instabot.py
 2. https://github.com/LevPasha/Instagram-API-python ?
 
+
+FindMostPopularAccountByTag
+dont know if the you can get tag feed sequneculy
+db?
+populerty formula? number of followers and tag caount.
 Checkusersinfo.py somefishy 
