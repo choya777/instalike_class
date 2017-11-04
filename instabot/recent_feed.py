@@ -23,7 +23,7 @@ def get_media_id_recent_feed(self):
         except:
             self.media_on_feed = []
             self.write_log('Except on get media!!')
-            time.sleep(20)
+            time.sleep(7)
             return 0
     else:
         return 0
