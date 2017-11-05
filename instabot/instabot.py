@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-
+#todo - change like_all_existing_media toget asinput alist of media idslis
 import atexit
 import datetime
 import itertools
