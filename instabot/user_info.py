@@ -9,8 +9,7 @@ import time
 def get_user_info(self, username):
     if self.login_status:
         now_time = datetime.datetime.now()
-        log_string = "%s : Get user info \n%s" % (
-            self.user_login, now_time.strftime("%d.%m.%Y %H:%M"))
+        log_string = "%s : Get user info \n%s" % (username, now_time.strftime("%d.%m.%Y %H:%M"))
         self.write_log(log_string)
         if self.login_status == 1:
             url = 'https://www.instagram.com/%s/?__a=1' % (username)
@@ -24,29 +23,20 @@ def get_user_info(self, username):
 
                 follows = user_info['user']['follows']['count']
                 follower = user_info['user']['followed_by']['count']
-                if self.is_self_checking is not False:
-                    self.self_following = follows
-                    self.self_follower = follower
-                    self.is_self_checking = False
-                    self.is_checked = True
-                    return 0
                 media = user_info['user']['media']['count']
                 follow_viewer = user_info['user']['follows_viewer']
                 followed_by_viewer = user_info['user']['followed_by_viewer']
-                requested_by_viewer = user_info['user'][
-                    'requested_by_viewer']
-                has_requested_viewer = user_info['user'][
-                    'has_requested_viewer']
+                requested_by_viewer = user_info['user']['requested_by_viewer']
+                has_requested_viewer = user_info['user']['has_requested_viewer']
                 full_name = user_info['user']['full_name']
                 log_string = "Follower : %i" % (follower)
                 self.write_log(log_string)
-                log_string = "Following : %s" % (follows)
+                log_string = "Following : %i" % (follows)
                 self.write_log(log_string)
                 log_string = "Media : %i" % (media)
                 self.write_log(log_string)
-                log_string = "Full Name : %i" % (full_name)
+                log_string = "Full Name : %s" % (full_name)
                 self.write_log(log_string)
-
                 if follower / follows > 2:
                     self.is_selebgram = True
                     self.is_fake_account = False
@@ -84,7 +74,7 @@ def get_user_info(self, username):
             except:
                 self.media_on_feed = []
                 self.write_log("Except on get_info!")
-                time.sleep(20)
+                time.sleep(2)
                 return 0
         else:
             return 0

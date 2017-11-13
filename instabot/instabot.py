@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-#todo - change like_all_existing_media toget asinput alist of media idslis
+
 import atexit
 import datetime
 import itertools
@@ -717,6 +717,7 @@ class InstaBot:
                 self.like_count = 0
                 # have random max_like - TODO: change according to user weight
             # ------------------- Like -------------------
+
             self.new_auto_mod_like_feed()
             # ------------------- Follow -------------------
             # self.new_auto_mod_follow()
@@ -761,7 +762,7 @@ class InstaBot:
                 self.next_iteration["Like"] = time.time() + \
                                               self.add_time(self.like_delay)
             # Del first media_id
-            del self.media_on_feed[0]
+            #del self.media_on_feed[0]
 
 
     def new_auto_mod_like_tag(self):

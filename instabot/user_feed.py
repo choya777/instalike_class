@@ -7,15 +7,15 @@ import time
 from user_info import get_user_info
 
 
-def get_media_id_user_feed(self):
+def get_media_id_user_feed(self, username):
     if self.login_status:
         if self.is_by_tag != True:
             log_string = "======> Get media id by user: %s <======" % (
-                self.current_user)
+                username)
             if self.is_checked != True:
-                get_user_info(self, self.current_user)
+                get_user_info(self, username)
             if self.is_fake_account != True and self.is_active_user != False and self.is_selebgram != True or self.is_by_tag != False:
-                url = 'https://www.instagram.com/%s/?__a=1' % (self.current_user)
+                url = 'https://www.instagram.com/%s/?__a=1' % (username)
         else:
             log_string = "======> Get media id by Tag <======"
             url = 'https://www.instagram.com/explore/tags/%s/?__a=1' % (

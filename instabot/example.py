@@ -15,7 +15,7 @@ from unfollow_protocol import unfollow_protocol
 bot = InstaBot(
     login="julietmiler",
     password="Choya1985",
-    like_per_day=1000,
+    like_per_day=250,
     comments_per_day=0,
     tag_list=['חתונה', 'מאורסת', 'israel', 'makeupaddict', 'איפורכלה', 'מתחתנת' ,'איפור'],
     tag_blacklist=['rain', 'thunderstorm'],
