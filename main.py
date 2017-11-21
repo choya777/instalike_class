@@ -1,4 +1,6 @@
-from time import sleep
+from time import sleep, time
+
+import sys
 
 from instabot.instabot import InstaBot
 from new_auto_mod_like2 import new_auto_mod_like2
@@ -72,7 +74,8 @@ def like1(self, list):
             # Some error. If repeated - can be ban!
             if self.error_400 >= self.error_400_to_ban:
                 # Look like you banned!
-                time.sleep(self.ban_sleep_time)
+                sys.exit()
+                #time.sleep(self.ban_sleep_time)
             else:
                 self.error_400 += 1
         else:

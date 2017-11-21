@@ -5,6 +5,8 @@ import json
 import random
 import time
 
+from check_biography import check_biography
+
 
 def get_user_info(self, username):
     if self.login_status:
@@ -29,6 +31,7 @@ def get_user_info(self, username):
                 requested_by_viewer = user_info['user']['requested_by_viewer']
                 has_requested_viewer = user_info['user']['has_requested_viewer']
                 full_name = user_info['user']['full_name']
+                biography = user_info['user']['biography']
                 log_string = "Follower : %i" % (follower)
                 self.write_log(log_string)
                 log_string = "Following : %i" % (follows)
@@ -37,8 +40,9 @@ def get_user_info(self, username):
                 self.write_log(log_string)
                 log_string = "Full Name : %s" % (full_name)
                 self.write_log(log_string)
+                check_biography(user_info)
                 if follower / follows > 2:
-                    self.is_selebgram = True
+                    # self.is_selebgram = True
                     self.is_fake_account = False
                     print('   >>>This is probably Selebgram account')
                 elif follows / follower > 2:
