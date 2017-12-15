@@ -5,10 +5,13 @@ import json
 import random
 import time
 
-from check_biography import check_biography
+from get_lang import get_lang
 
+words_he = ['איפור', 'מאפרת', 'ומאפרת', 'מעצבת שיער', 'מעצבת שיער', 'חתונה' ,'לכלות',  'שמלת כלה', 'כלה']
+words_en = [ 'makeup', 'Makeup', 'bridal']
 
 def get_user_info(self, username):
+    score = 0
     if self.login_status:
         now_time = datetime.datetime.now()
         log_string = "%s : Get user info \n%s" % (username, now_time.strftime("%d.%m.%Y %H:%M"))
@@ -17,12 +20,9 @@ def get_user_info(self, username):
             url = 'https://www.instagram.com/%s/?__a=1' % (username)
             try:
                 r = self.s.get(url)
-
                 user_info = json.loads(r.text)
-
                 log_string = "Checking user info.."
                 self.write_log(log_string)
-
                 follows = user_info['user']['follows']['count']
                 follower = user_info['user']['followed_by']['count']
                 media = user_info['user']['media']['count']
@@ -40,41 +40,23 @@ def get_user_info(self, username):
                 self.write_log(log_string)
                 log_string = "Full Name : %s" % (full_name)
                 self.write_log(log_string)
-                check_biography(user_info)
-                if follower / follows > 2:
-                    # self.is_selebgram = True
-                    self.is_fake_account = False
-                    print('   >>>This is probably Selebgram account')
-                elif follows / follower > 2:
-                    self.is_fake_account = True
-                    self.is_selebgram = False
-                    print('   >>>This is probably Fake account')
+                #AI
+                score = 0
+                if follower < 10000:
+                    score += follower // 100
                 else:
-                    self.is_selebgram = False
-                    self.is_fake_account = False
-                    print('   >>>This is a normal account')
-
-                if follows / media < 10 and follower / media < 10:
-                    self.is_active_user = True
-                    print('   >>>This user is active')
-                else:
-                    self.is_active_user = False
-                    print('   >>>This user is passive')
-
-                if follow_viewer or has_requested_viewer:
-                    self.is_follower = True
-                    print("   >>>This account is following you")
-                else:
-                    self.is_follower = False
-                    print('   >>>This account is NOT following you')
-
-                if followed_by_viewer or requested_by_viewer:
-                    self.is_following = True
-                    print('   >>>You are following this account')
-                else:
-                    self.is_following = False
-                    print('   >>>You are NOT following this account')
-                    self.is_checked = True
+                    score += follower // 1000
+                score += check_biography(user_info, biography)
+                if media > 100:
+                    score += 30
+                if 'he' in get_lang(full_name):
+                    score += 30
+                if follower > follows:
+                    score += 40
+                if follow_viewer == True:
+                    score += 30
+                self.user_score = score
+                return self.user_score
             except:
                 self.media_on_feed = []
                 self.write_log("Except on get_info!")
@@ -82,3 +64,52 @@ def get_user_info(self, username):
                 return 0
         else:
             return 0
+    return score
+
+def words_in_string(word_list, a_string):
+    return set(word_list).intersection(a_string.split())
+
+def check_biography(self, biography):
+    if biography == None:
+        #get language of media caption
+        for i in range(len(self['user']['media']['nodes'])):
+            lang = get_lang(self['user']['media']['nodes'][i]['caption'])
+            if 'he' in lang:
+                return 30
+    elif words_in_string(words_he, biography):
+            return 100
+    elif words_in_string(words_en, biography):
+            return 50
+    else:
+            return 0
+
+#def user_weight():
+
+'''def post_weight(self):
+    biography = self['user']['biography']
+    if biography != None:
+        #check if hebrew
+        if get_lang(biography) !=False:
+            if words_in_string(words_he, biography):
+                self.is_selebgram = True
+                print("found in biography")
+            elif words_in_string(words_he, self.user['full_name']):
+                self.is_selebgram = True
+                print("found in full name")
+            else:
+                self.is_selebgram = False
+                print("no selebgram")
+    else:
+        print("no biography or full name found , checking user_media")
+        i = 0
+        user_media = self['user']['media']['nodes']
+        for c in user_media:
+            caption = c[i]['caption']
+            if words_in_string(words_he, caption):
+                print("found in caption")
+                self.is_selebgram = True
+                break
+            else:
+                i += 1
+        self.is_selebgram = False
+'''

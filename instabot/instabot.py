@@ -63,6 +63,7 @@ class InstaBot:
     ban_sleep_time = 2 * 60 * 60
 
     # All counter.
+    user_score = 0
     bot_mode = 0
     like_counter = 0
     follow_counter = 0
@@ -168,9 +169,9 @@ class InstaBot:
             self.comments_delay = self.time_in_day / self.comments_per_day
 
         # Don't like if media have more than n likes.
-        self.media_max_like = media_max_like
+        self.media_max_like = self.user_score / 30
         # Don't like if media have less than n likes.
-        self.media_min_like = media_min_like
+        self.media_min_like = self.user_score / 100
         # Auto mod seting:
         # Default list of tag.
         self.tag_list = tag_list
@@ -192,6 +193,7 @@ class InstaBot:
         self.user_login = login.lower()
         self.user_password = password
         self.bot_mode = 0
+        self.user_score = 0
         self.media_by_tag = []
         self.media_on_feed = []
         self.media_by_user = []
