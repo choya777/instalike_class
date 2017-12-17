@@ -3,9 +3,8 @@
 def new_like_all_exist_media(self):
     i = 0
     num_likes = self.user_score // 50
-    # Media count by this user.
+    # user's media
     l_c = self.media_by_user
-
     for i in range(num_likes):
         for d in l_c:
             log_string = "Trying to like media:" + str(d['id'])

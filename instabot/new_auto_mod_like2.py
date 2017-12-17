@@ -14,5 +14,6 @@ def new_auto_mod_like2(self):
         self.write_log(log_string)
 
         new_like_all_exist_media(self)
+
         # Del first media_id
         del self.media_by_user[self.current_index]
