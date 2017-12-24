@@ -12,7 +12,7 @@ def get_media_id_user_feed(self, username):
         if self.is_by_tag != True:
             log_string = "======> Get media id by user: %s <======" % (
                 username)
-            self.user_score = get_user_info(self, username)
+            get_user_info(self, username)
             url = 'https://www.instagram.com/%s/?__a=1' % (username)
         else:
             log_string = "======> Get media id by Tag <======"

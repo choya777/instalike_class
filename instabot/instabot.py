@@ -76,6 +76,7 @@ class InstaBot:
     bot_follow_list = []
     user_info_list = []
     user_list = []
+    bot_comment_sit = []
     ex_user_list = []
     unwanted_username_list = []
     is_checked = False

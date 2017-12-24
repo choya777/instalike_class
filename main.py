@@ -2,8 +2,10 @@ from time import sleep, time
 
 import sys
 
+from get_user_feed import get_user_feed
 from instabot.instabot import InstaBot
 from new_auto_mod_like2 import new_auto_mod_like2
+from new_auto_mod_likeall import new_like_all_exist_media
 from recent_feed import get_media_id_recent_feed
 from user_feed import get_media_id_user_feed
 from user_info import get_user_info
@@ -84,22 +86,48 @@ def like1(self, list):
             self.write_log(log_string)
             return False
 
+def get_feed(self):
+    while True:
+        get_media_id_recent_feed(self)
+        for d in self.media_on_feed:
+            feed = {}
+            media_preview_like = d['node']['edge_media_preview_like']
+            media_preview_comment = d['node']['edge_media_preview_like']
+            media_tagged_user = d['node']['edge_media_to_tagged_user']['edges']
+            madia_caption = d['node']['edge_media_to_caption']
+            owner = d['node']['owner']['username']
+            location = d['node']['location']
+            media_id = d['node']['id']
+            #get the owner from media and evaluate it, if high score like users's media.
+            self.user_score = get_user_info(self, owner)
+            if self.user_score >=100:
+                get_user_feed(self, owner)
+                num_likes = self.user_score // 50
+                new_like_all_exist_media(self, num_likes)
+            #get all user which liked the media and evaluate score, user with high score get to self.bot_follow_list
+            for media in media_preview_like['edges']:
+                self.user_score = get_user_info(self, media['node']['username'])
+                if self.user_score >= 100:
+                    self.bot_follow_list.append(media['username'])
+                    new_like_all_exist_media(self, num_likes)
+
+            return
+
+
+
+            #get_media_id_user_feed(bot, user_name)
+            # get_user_info(bot, user_name)
+
 
 def main():
-    while True:
-        get_media_id_recent_feed(bot)
-        for d in bot.media_on_feed:
-            like1(bot, d)
-            sleep(3)
-            user_name = d['node']['owner']['username']
-            get_media_id_user_feed(bot, user_name)
-            sleep(2)
-            # get_user_info(bot, user_name)
-            new_auto_mod_like2(bot)
+    get_feed(bot)
+    #comment(self.bot_comment_list)
+    new_auto_mod_like2(bot)
             # print(FindMostPopularAccountByTags(bot, TAGS, 5).get_all_media_by_tag(TAGS[1]))
 
 if __name__ == '__main__':
     main()
+
 
 
 
